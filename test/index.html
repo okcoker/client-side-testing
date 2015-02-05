@@ -23,7 +23,7 @@ break anything with or without it. -->
 <!-- We will using BDD-style assertions. See mocha documentation if you want more info about this line -->
 <script>mocha.setup('bdd');</script>
 
-<!-- The source file we will be testing! -->
+<!-- The source file we will be testing! Don't forget the data-cover attribute so blanket will know what file will need to be instrumented for coverage. -->
 <script src="../js/calculator.js" data-cover></script>
 
 <!-- Our test suite needs to be after the source file, of course -->
