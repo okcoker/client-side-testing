@@ -23,62 +23,34 @@ module.exports = function(grunt) {
 
         karma : {
             options: {
-                // base path that will be used to resolve all patterns (eg. files, exclude)
-                basePath: '',
+                configFile: 'karma.conf.js',
 
+                // These files are probably going to be included in
+                // all our tests that we'd write. The files object in
+                // each individual karma target are added to these.
+                files: [
+                    'node_modules/chai/chai.js',
+                    'node_modules/sinon-chai/lib/sinon-chai.js',
+                    'node_modules/sinon/pkg/sinon.js',
 
-                // frameworks to use
-                // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-                frameworks: ['mocha'],
+                    // In our case, the test and src files are the
+                    // same for dev and prod
+                    'js/calculator.js',
+                    'test/calculator-test.js',
 
-                // list of files / patterns to load in the browser
-                files: [],
+                    // html2js preprocessor takes care of this
+                    'test/index.html'
+                ]
+            },
 
-                // list of files to exclude
-                exclude: [
-                ],
+            dev: {
+                browsers: ['Chrome', 'Firefox', 'PhantomJS']
+            },
 
-                // preprocess matching files before serving them to the browser
-                // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-                preprocessors: {
-                    'test/*.html': ['html2js'],
-                    'js/*.js': ['coverage']
-                },
-
-                // test results reporter to use
-                // possible values: 'dots', 'progress'
-                // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-                reporters: ['progress', 'coverage'],
-
-                // web server port
-                port: 9877,
-
-                // enable / disable colors in the output (reporters and logs)
-                colors: true,
-
-                // enable / disable watching file and executing tests whenever any file changes
-                autoWatch: true,
-
-                // start these browsers
-                // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-                browsers: ['Chrome', 'Firefox', 'PhantomJS'],
-
-                // Continuous Integration mode
-                // if true, Karma captures browsers, runs the tests and exits
-                singleRun: false,
-
-                coverageReporter: {
-                    dir: 'tests/js/coverage',
-                    instrumenter: {},
-                    reporters: [
-                        // reporters not supporting the `file` property
-                        { type: 'html', subdir: 'report-html' },
-                        { type: 'lcov', subdir: 'report-lcov' },
-                        // reporters supporting the `file` property, use `subdir` to directly
-                        // output them in the `dir` directory
-                        { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' }
-                    ]
-                }
+            // run tests once in PhantomJS browser.
+            prod: {
+                singleRun: true,
+                browsers: ['PhantomJS']
             }
         }
     });
