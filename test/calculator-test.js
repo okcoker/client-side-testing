@@ -6,6 +6,19 @@
 
     var expect = chai.expect;
 
+    if (!Function.prototype.bind) {
+        Function.prototype.bind = function() {
+
+            var fn = this,
+                args = Array.prototype.slice.call(arguments),
+                context = args.shift();
+
+            return function() {
+                fn.apply(context, args);
+            };
+        };
+    }
+
     ////////////////
     // Test suite //
     ////////////////
@@ -23,7 +36,6 @@
 
         describe('Adding', function() {
             it('should throw an error if a non-numeric value is used', function() {
-                console.log(this.calculator);
                 expect(this.calculator.add.bind(this.calculator, 2, 'a')).to.throw();
             });
 
