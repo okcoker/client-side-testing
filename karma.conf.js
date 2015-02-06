@@ -50,7 +50,7 @@ module.exports = function(config) {
         logLevel: config.LOG_INFO,
 
         coverageReporter: {
-            dir: 'test/js/coverage',
+            dir: 'test/coverage',
 
             // Force the use of the Istanbul instrumenter to cover files
             instrumenter: {
