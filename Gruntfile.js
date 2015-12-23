@@ -37,6 +37,8 @@ module.exports = function(grunt) {
                     'node_modules/sinon-chai/lib/sinon-chai.js',
                     'node_modules/sinon/pkg/sinon.js',
 
+                    'test/polyfills.js',
+
                     // In our case, the test and src files are the
                     // same for the dev and prod targets so we can include
                     // them in the global files option here
